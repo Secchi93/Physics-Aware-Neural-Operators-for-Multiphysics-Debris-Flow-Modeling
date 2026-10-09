@@ -1,0 +1,82 @@
+seed: 1234
+experiment:
+  tier: deep200
+  label: deep200_gino_adaptive
+  purpose: 200-epoch controlled six-model FNO/GNO/GINO Cartesian-vs-adaptive training-budget
+    sensitivity benchmark
+data:
+  manifest: output/dataset/manifest.csv
+  target_scales: output/target_scales.json
+  frame_stride: 2
+  validation_frame_stride: 2
+  raster_dx: 10.0
+  cache_static_items: 12
+  representation: adaptive
+model:
+  kind: gino
+  latent_resolution:
+  - 48
+  - 48
+  fno_n_modes:
+  - 12
+  - 12
+  fno_hidden_channels: 18
+  fno_n_layers: 4
+  fno_lifting_channel_ratio: 2
+  projection_channel_ratio: 2
+  in_gno_radius: 0.055
+  out_gno_radius: 0.055
+  in_gno_max_neighbors: 16
+  out_gno_max_neighbors: 16
+  gno_graph_cache_dir: output/gino_graph_cache_k16
+  in_gno_transform_type: nonlinear
+  out_gno_transform_type: nonlinear
+  in_gno_channel_mlp_hidden_layers:
+  - 64
+  - 64
+  out_gno_channel_mlp_hidden_layers:
+  - 64
+  - 64
+  gno_pos_embed_type: null
+  gno_embed_channels: 16
+  gno_use_torch_scatter: false
+  gno_use_open3d: false
+  fast_segment_reduce: true
+training:
+  epochs: 200
+  batch_size: 1
+  gradient_accumulation: 2
+  samples_per_epoch: 1024
+  num_workers: 2
+  lr: 0.0005
+  min_lr: 1.0e-06
+  weight_decay: 1.0e-06
+  grad_clip: 1.0
+  validation_max_batches: 120
+  validation_num_workers: 1
+  prefetch_factor: 2
+loss:
+  wet_weight: 8.0
+  h_wet_m: 0.001
+  wet_temperature_m: 0.0002
+  max_support_class_weight: 50.0
+  lambda_mass: 0.05
+  lambda_wet: 0.2
+  lambda_dry_depth: 0.05
+  lambda_dry_momentum: 0.02
+  lambda_admissible: 0.05
+  dry_depth_tolerance_m: 0.00025
+  lambda_velocity: 0.05
+  lambda_momentum_consistency: 0.02
+  velocity_min_depth_m: 0.05
+  velocity_scale_ms: 2.0
+  velocity_huber_delta_ms: 1.0
+  rho_f_kg_m3: 1000.0
+  rho_s_kg_m3: 2650.0
+  lambda_admissible_l1: 0.02
+output:
+  out_dir: output/models/deep200/gino_adaptive
+evaluation:
+  h_wet_m: 0.001
+  h_velocity_m: 0.01
+  relative_volume_floor_fraction: 0.001

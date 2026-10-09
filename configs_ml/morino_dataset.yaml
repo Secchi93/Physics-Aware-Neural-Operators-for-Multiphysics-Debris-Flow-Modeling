@@ -1,0 +1,100 @@
+# Morino controlled FNO-vs-GINO study.
+# Exactly 300 physical scenarios are generated and solved twice:
+#   300 Cartesian dx=10 m runs + 300 terrain-adapted 10/12.5/15 m runs.
+# The same scenario IDs/parameters are used by both discretizations.
+n_profiles: 6
+seed: 1234
+
+paths:
+  dem_path: "../output/inputs/dem.zip"
+  zip_member: "DEM/DemMosaic_WGS84_33N.asc"
+  geometry_cache: "../output/inputs/geometry.json"
+  dataset_root: "../output/dataset"
+
+  # New writable DEM cache. Existing cache files are never overwritten.
+  solver_cache_root: "../output/dataset/cache"
+# 50 scenarios/profile x 6 profiles = 300 scenarios per discretization.
+# Total high-fidelity solver runs when --mode both is used: 600.
+counts_per_profile:
+  train: 30
+  validation: 5
+  iid_test: 5
+  single_ood_test: 5
+  joint_ood_test: 5
+
+# Parameter generalization only. All six topographic profiles occur in every split.
+# mu_scale multiplies the Morino reference zonation mu1=0.01, mu2=0.10.
+parameter_space:
+  mu_scale_full: [0.50, 5.00]
+  mu_scale_train: [0.80, 3.20]
+  xi_full: [100.0, 500.0]
+  xi_train: [180.0, 420.0]
+  volume_full_m3: [10000.0, 100000.0]
+  volume_train_m3: [20000.0, 80000.0]
+
+solver:
+  # Cartesian reference discretization.
+  cartesian_dx_m: 10.0
+  t_end_s: 1000.0
+  output_dt_s: 20.0
+  cfl: 0.20
+  dt_max: 0.25
+  h_dry: 1.0e-4
+  flux: "hllc"
+  # Same formal order on both discretizations for the architecture comparison.
+  space_order: 1
+  time_order: 1
+  bc_left: "outflow"
+  bc_right: "outflow"
+  bc_bottom: "outflow"
+  bc_top: "outflow"
+  release_initial_speed_ms: 0.0
+  progress_every_steps: 500
+
+material:
+  rho_fluid: 1000.0
+  rho_solid: 2650.0
+  initial_solid_fraction: 0.55
+  initial_coarse_fraction: 0.40
+  initial_upper_solid_fraction: 0.50
+  max_solid_fraction: 0.68
+
+physics:
+  erosion: true
+  deposition: true
+  segregation: true
+  update_bed: true
+  erodible_depth_m: 0.50
+  bed_porosity: 0.40
+  bed_coarse_fraction: 0.45
+  erosion_critical_shear_pa: 2000.0
+  excess_shear_rate_ms: 2.5e-5
+  excess_shear_exponent: 1.0
+  max_erosion_rate_ms: 0.01
+  deposition_critical_shear_pa: 500.0
+  hindered_settling_exponent: 4.65
+  max_deposition_rate_ms: 0.05
+  minimum_mobile_depth_m: 0.005
+  segregation_length_m: 0.01
+  max_segregation_speed_ms: 0.20
+  remix_diffusivity_m2s: 1.0e-4
+  min_layer_thickness_m: 0.01
+
+adaptive_mesh:
+  # Exact requested adaptive cell sizes. grid_unit is only the geometric common unit.
+  grid_unit_m: 2.5
+  dx_levels_m: [15.0, 12.5, 10.0]
+  # Patch aggregation uses 150 m macro-patches (common multiple of 10/12.5/15)
+  # so no hidden 2.5/5/7.5 m transition cells are generated.
+  aggregation_mode: "patch"
+  patch_size_m: 150.0
+  # Rank full 150 m patches by terrain complexity. This guarantees a genuinely
+  # multi-resolution 10/12.5/15 m mesh even when Morino is steep almost everywhere.
+  patch_quantile_adaptation: true
+  coarse_patch_fraction: 0.40
+  medium_patch_fraction: 0.30
+  refine_slope: 0.60
+  refine_relief_m: 18.0
+  refine_release: true
+  release_buffer_m: 0.0
+  edge_decimals: 8

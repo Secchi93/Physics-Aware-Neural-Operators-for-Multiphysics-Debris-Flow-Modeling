@@ -1,0 +1,13 @@
+# ML-only environment for the six-model FNO/GNO/GINO benchmark.
+# Install the CUDA-enabled PyTorch build appropriate for your GPU/driver first.
+# PyTorch is intentionally not pinned here because its wheel index is CUDA-specific.
+numpy>=2.0
+scipy>=1.12
+PyYAML>=6.0
+matplotlib>=3.8
+h5py>=3.10
+pandas>=2.0
+neuraloperator==2.0.0
+pytest>=8.0
+psutil>=5.9
+rasterio>=1.3
