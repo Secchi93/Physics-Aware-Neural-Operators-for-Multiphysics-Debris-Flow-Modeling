@@ -44,7 +44,7 @@ class LossConfig:
     # being penalized until it exceeds this tolerance.
     dry_depth_tolerance_m: float = 2.5e-4
 
-    # v11: speed of the bulk mixture is MOMENTUM / MASS PER AREA, not q/h.
+    # speed of the bulk mixture is MOMENTUM / MASS PER AREA, not q/h.
     # This term complements (does not replace) normalized conservative MSE.
     lambda_velocity: float = 0.05
     lambda_momentum_consistency: float = 0.02
