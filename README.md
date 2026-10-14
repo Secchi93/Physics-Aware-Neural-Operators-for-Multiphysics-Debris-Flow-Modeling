@@ -36,10 +36,10 @@ The **same six terrain profiles occur in all splits**; OOD means extrapolation i
 
 ## Data, code and external dependencies
 
-- **This repository (GitHub):** data preparation, training, evaluation, inference, benchmarking, plotting and configuration files. Repository URL: **[ADD_GITHUB_URL]**.
-- **Dataset (Zenodo):** the `dataset/` directory with `manifest.csv`, HDF5 trajectories and mesh/profile files, plus the original `target_scales.json`. DOI: **[ADD_DATASET_ZENODO_DOI]**.
-- **Trained models (Zenodo):** the six main `deep200` checkpoints, original training `history.json` records, and the optional `deep200_wpos4` / `deep200_wpos16` FNO-C ablation checkpoints. DOI: **[ADD_MODELS_ZENODO_DOI]**.
-- **External forward solver:** [PyDebrisFlow2D](https://github.com/Secchi93/PyDebrisFlow2D); its source code is **not included here**. The exact solver revision used to generate the published trajectories should be recorded with the Zenodo dataset: **[ADD_SOLVER_COMMIT]**.
+- **This repository (GitHub):** data preparation, training, evaluation, inference, benchmarking, plotting and configuration files.
+- **Dataset (Zenodo):** the `dataset/` directory with `manifest.csv`, HDF5 trajectories and mesh/profile files, plus the original `target_scales.json`. DOI: **https://zenodo.org/records/23313028**.
+- **Trained models (Zenodo):** the six main `deep200` checkpoints, original training `history.json` records, and the optional `deep200_wpos4` / `deep200_wpos16` FNO-C ablation checkpoints. DOI: **https://zenodo.org/records/23313028**.
+- **External forward solver:** [PyDebrisFlow2D](https://github.com/Secchi93/PyDebrisFlow2D); its source code is **not included here**.
 
 > **Reproducibility note:** PyDebrisFlow2D `1.4.0`, installed from GitHub commit `02f2102680f6d0e7d8c0b0a9d0bfa5cd387ba796`, passed the external import smoke check during repository testing. This alone does **not** establish that it is the exact revision originally used to create the dataset. Do not replace the original published trajectories when checking the pretrained surrogate results.
 
