@@ -1,4 +1,4 @@
-"""Recreate v11 training curves from history.json; does not touch model weights."""
+"""Recreate training curves from history.json; does not touch model weights."""
 from __future__ import annotations
 import argparse
 import json
