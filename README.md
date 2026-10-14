@@ -37,8 +37,8 @@ The **same six terrain profiles occur in all splits**; OOD means extrapolation i
 ## Data, code and external dependencies
 
 - **This repository (GitHub):** data preparation, training, evaluation, inference, benchmarking, plotting and configuration files.
-- **Dataset (Zenodo):** the `dataset/` directory with `manifest.csv`, HDF5 trajectories and mesh/profile files, plus the original `target_scales.json`. DOI: **https://zenodo.org/records/23313028**.
-- **Trained models (Zenodo):** the six main `deep200` checkpoints, original training `history.json` records, and the optional `deep200_wpos4` / `deep200_wpos16` FNO-C ablation checkpoints. DOI: **https://zenodo.org/records/23313028**.
+- **Dataset (Zenodo):** the `dataset/` directory with `manifest.csv`, HDF5 trajectories and mesh/profile files, plus the original `target_scales.json`. DOI: https://zenodo.org/records/23313028.
+- **Trained models (Zenodo):** the six main `deep200` checkpoints, original training `history.json` records, and the optional `deep200_wpos4` / `deep200_wpos16` FNO-C ablation checkpoints. DOI: https://zenodo.org/records/23313028.
 - **External forward solver:** [PyDebrisFlow2D](https://github.com/Secchi93/PyDebrisFlow2D); its source code is **not included here**.
 
 > **Reproducibility note:** PyDebrisFlow2D `1.4.0`, installed from GitHub commit `02f2102680f6d0e7d8c0b0a9d0bfa5cd387ba796`, passed the external import smoke check during repository testing. This alone does **not** establish that it is the exact revision originally used to create the dataset. Do not replace the original published trajectories when checking the pretrained surrogate results.
@@ -94,8 +94,8 @@ From **Windows CMD / Anaconda Prompt** (commands shown for this environment):
 conda create -n neural-operators python=3.13 -y
 conda activate neural-operators
 
-git clone [ADD_GITHUB_URL]
-cd [REPOSITORY_NAME]
+git clone https://github.com/Secchi93/Physics-Aware-Neural-Operators-for-Multiphysics-Debris-Flow-Modeling.git
+cd Physics-Aware-Neural-Operators-for-Multiphysics-Debris-Flow-Modeling
 ```
 
 Install [PyTorch](https://pytorch.org/get-started/locally/) using the **official command for your platform and CUDA driver**, then install this repository's requirements:
@@ -263,6 +263,6 @@ The repository has been functionally checked on real data with six GPU smoke tes
 
 ## Citation and license
 
-Please cite the associated journal article when available (**[ADD_ARTICLE_DOI]**), the relevant dataset/model Zenodo records and [PyDebrisFlow2D](https://github.com/Secchi93/PyDebrisFlow2D) as appropriate. Please also archive/tag the code version used for the article to make results traceable.
+Please cite the associated journal article when available, the relevant dataset/model Zenodo records https://zenodo.org/records/23313028 and [PyDebrisFlow2D](https://github.com/Secchi93/PyDebrisFlow2D) as appropriate. 
 
 The repository license is provided in [`LICENSE`](LICENSE).
