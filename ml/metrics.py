@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""Reviewer-oriented field, hazard, temporal and physical metrics.
+"""Oriented field, hazard, temporal and physical metrics.
 
 Derived hazard metrics use explicit physical thresholds.  Wet/dry support is
 classified at ``h_wet_m`` (1 mm by default, matching the solver H_DRY), while
