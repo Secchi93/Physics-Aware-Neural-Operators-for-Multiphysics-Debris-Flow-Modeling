@@ -1,5 +1,5 @@
 from __future__ import annotations
-"""Lean paper-only evaluator for FNO/GNO/GINO; no training or checkpoint changes.
+"""Evaluator for FNO/GNO/GINO.
 
 Metrics: h RMSE/R2, wet IoU and false/missed area (1 mm), runout absolute
 error, both-wet speed MAE (50 mm), fluid volume relative bias, conditional
